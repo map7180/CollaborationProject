@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+ http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context-4.0.xsd
+ http://www.springframework.org/schema/tx
+ http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
+		<property name="username" value="blogit" />
+		<property name="password" value="blog@123" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<value>edu.almabridge</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="userDetailsDAO" class="edu.almabridge.daoImpl.UserDetailsDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="jobDetailsDAO" class="edu.almabridge.daoImpl.JobDetailsDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="eventDAO" class="edu.almabridge.daoImpl.EventDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="JAFDAO" class="edu.almabridge.daoImpl.JAFDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="BlogDAO" class="edu.almabridge.daoImpl.BlogDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="Blog_CommentDAO" class="edu.almabridge.daoImpl.Blog_CommentDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="FriendDAO" class="edu.almabridge.daoImpl.FriendDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+<!-- 	<bean id="Chat" class="edu.almabridge.model.Chat">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean> -->
+
+	<!-- <bean id="userDetails" class="edu.almabridge.model.UserDetails"> <property 
+		name="sessionFactory" ref="sessionFactory" /> </bean> <bean id="jobDetails" 
+		class="edu.almabridge.model.JobDetails"> <property name="sessionFactory" 
+		ref="sessionFactory" /> </bean> <bean id="jAF" class="edu.almabridge.model.JAF"> 
+		<property name="sessionFactory" ref="sessionFactory" /> </bean> <bean id="event" 
+		class="edu.almabridge.model.Event"> <property name="sessionFactory" ref="sessionFactory" 
+		/> </bean> <bean id="blog" class="edu.almabridge.model.Blog"> <property name="sessionFactory" 
+		ref="sessionFactory" /> </bean> -->
+	<tx:annotation-driven />
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+</beans> 

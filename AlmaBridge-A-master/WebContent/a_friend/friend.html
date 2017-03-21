@@ -1,0 +1,55 @@
+<div class=" text-center" ng-controller="friendController as fC">
+	<h1>Pending Friend Requests</h1>
+	
+	<table class="table">
+		<tr>
+			<th>Friend Id</th>
+			<th>User Id</th>
+			<th>Status</th>
+			<th>IsOnline</th>
+			
+			<th>Accept</th>
+			<th>Reject</th>
+			
+		</tr>
+		<tr ng-repeat="pF in fC.pendingFriends">
+			<td>{{pF.friendId}}</td>
+			<td>{{pF.userId}}</td>
+			<td>{{pF.status}}</td>
+			<td>{{pF.isOnline}}</td>
+			
+			<td><a href="" ng-click="approveFriend(pF.userId)">Accept
+			</a></td>
+			<td><a href="" ng-click="rejectFriend(pF.friendId)">Reject
+			</a></td>
+			<!-- <td><a href="" ng-click="edit(event.eventId)">Edit</a></td> -->
+		</tr>
+	</table>
+	
+	<br>
+	<h1>Friend List</h1>
+	
+	<table class="table">
+		<tr>
+			<th>Friend Id</th>
+			<th>UserId Id</th>
+			<th>Status</th>
+			<th>IsOnline</th>
+			<th>Unfriend</th>
+			<th>Chat</th>
+			
+		</tr>
+		<tr ng-repeat="friend  in fC.friends">
+			<td>{{friend.friendId}}</td>
+			<td>{{friend.userId}}</td>
+			<td>{{friend.status}}</td>
+			<td>{{friend.isOnline}}</td>
+			
+			<td><a href="" ng-click="unFriend(friend.friendId)">Unfriend
+			</a></td>
+			<td><a href="#chat" >Chat
+			</a></td>
+			<!-- <td><a href="" ng-click="edit(event.eventId)">Edit</a></td> -->
+		</tr>
+	</table>
+</div>

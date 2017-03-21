@@ -1,0 +1,27 @@
+<div class=" text-center" ng-controllers="registerController ">
+	<h1>User Page</h1>
+
+	<table class="table">
+		<tr>
+			<th>UserId</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Mobile</th>
+			<th>Role</th>
+			<th ng-show = "currentUserRoleId == 'Role_Admin'">Approve/Reject</th>
+			<th ng-show = "currentUserRoleId == 'Role_Admin'">Make admin</th>
+			<th>send Friend Request</th>
+		</tr>
+		<tr ng-repeat="user in users">
+			<td>{{user.userId}}</td>
+			<td>{{user.name}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.mobile}}</td>
+			<td>{{user.roleId}}</td>
+			<td ng-show = "currentUserRoleId == 'Role_Admin'"><a href="" ng-click="approve(user.userId)">Approve</a><a
+				href="" ng-click="reject(user.userId)" style="color: red">Reject</a></td>
+			<td ng-show = "currentUserRoleId == 'Role_Admin'"><a href="" ng-click="makeAdmin(user.userId)">Make admin</a></td>
+			<td><a href="" ng-click="addFriendX(user.userId)">Send Friend Request</a></td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,86 @@
+
+
+
+<div class="container text-center" ng-controller="blogController as bC">
+	<h1>Blog Page</h1>
+	<!-- <p>{{ message }}</p> -->
+	<!--  <p>{{ blog }}</p> 
+	 <h1 ng-repeat="blog in blogs">{{blog.blogId}},{{blog.title}} ,{{blog.likes}}, {{blog.dislikes}},{{blog.noOfViews}}</h1>  -->
+	 
+	 <div class="col-md-6 col-md-offset-3 text-center">
+
+		<form name="blogForm" ng-submit="bC.submit()" role="form" id="blogForm">
+
+
+			<div class="form-group"
+				ng-class="{ 'has-error': blogForm.blogId.$dirty && blogForm.blogId.$error.required }">
+
+				<input type="hidden" name="blogId" id="blogId"
+					class="form-control" ng-model="bC.blog.blogId" />
+
+			</div>
+			<div class="form-group"
+				ng-class="{ 'has-error': blogForm.title.$dirty && blogForm.title.$error.required }">
+				<label for="title">Blog Title</label> <input type="text"
+					name="title" id="title" class="form-control"
+					ng-model="bC.blog.title" required /> <span
+					ng-show="blogForm.title.$dirty && blogForm.title.$error.required"
+					class="help-block">Title is required</span>
+			</div>
+<!-- 			<div class="form-group"
+				ng-class="{ 'has-error': blogForm.eventDate.$dirty && blogForm.eventDate.$error.required }">
+				<label for="eventDate">Event Date</label> <input type="text"
+					name="eventDate" id="eventDate" class="form-control"
+					ng-model="bC.event.eventDate" required /> <span
+					ng-show="blogForm.eventDate.$dirty && blogForm.eventDate.$error.required"
+					class="help-block">Event Date is required</span>
+			</div> -->
+
+			<div class="form-group"
+				ng-class="{ 'has-error': blogForm.description.$dirty && blogForm.description.$error.required }">
+				<label for="description">Description</label> <input type="text"
+					name="description" id="description" class="form-control"
+					ng-model="bC.blog.description" required /> <span
+					ng-show="blogForm.description.$dirty && blogForm.description.$error.required"
+					class="help-block">Description is required</span>
+			</div>
+
+			<div class="form-actions">
+				<input type="submit" value="Add" class="btn btn-primary btn-sm"
+					ng-disabled="blogForm.$invalid">
+				<button type="button" ng-click="bC.reset()"
+					class="btn btn-warning btn-sm" ng-disabled="blogForm.$pristine">Reset
+					Form</button>
+			</div>
+		</form>
+		<hr>
+	</div>
+	 
+	 
+
+	<div class="row row-content" >
+		<div class="col-xs-12">
+			<ul class="media-list tab-pane fade in active">
+				<li class="media" ng-repeat="blog in blogs | filter:filtText">
+					<div class="media-left media-middle">
+						<img class="media-object img-thumbnail"
+							ng-src='resources/images/uthapizza.png' alt="Blog Image"> </a>
+					</div>
+					<div class="media-body">
+						<h2 class="media-heading">
+							{{blog.title}} <span class="label label-danger">{{blog.blogDate}}</span>
+							<span class="badge">{{blog.noOfViews}}</span>
+						</h2>
+
+						<hr>
+						<a href="" ng-click="getBlog(blog.blogId)">Read More..</a>
+
+					</div>
+
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+

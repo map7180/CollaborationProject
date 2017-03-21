@@ -1,0 +1,81 @@
+<div class=" text-center" ng-controller="eventController as eC">
+	<h1>Event Page</h1>
+
+
+
+	<div class="col-md-6 col-md-offset-3 text-center">
+
+		<form name="eventForm" ng-submit="eC.submit()" role="form" id="eventForm">
+
+
+			<div class="form-group"
+				ng-class="{ 'has-error': eventForm.eventId.$dirty && eventForm.eventId.$error.required }">
+
+				<input type="hidden" name="eventId" id="eventId"
+					class="form-control" ng-model="eC.event.eventId" />
+
+			</div>
+			<div class="form-group"
+				ng-class="{ 'has-error': eventForm.eventLocation.$dirty && eventForm.eventLocation.$error.required }">
+				<label for="eventLocation">Event Location</label> <input type="text"
+					name="eventLocation" id="eventLocation" class="form-control"
+					ng-model="eC.event.eventLocation" required /> <span
+					ng-show="eventForm.eventLocation.$dirty && eventForm.eventLocation.$error.required"
+					class="help-block">Event Location is required</span>
+			</div>
+			<div class="form-group"
+				ng-class="{ 'has-error': eventForm.eventDate.$dirty && eventForm.eventDate.$error.required }">
+				<label for="eventDate">Event Date</label> <input type="text"
+					name="eventDate" id="eventDate" class="form-control"
+					ng-model="eC.event.eventDate" required /> <span
+					ng-show="eventForm.eventDate.$dirty && eventForm.eventDate.$error.required"
+					class="help-block">Event Date is required</span>
+			</div>
+
+			<div class="form-group"
+				ng-class="{ 'has-error': eventForm.description.$dirty && eventForm.description.$error.required }">
+				<label for="description">Description</label> <input type="text"
+					name="description" id="description" class="form-control"
+					ng-model="eC.event.description" required /> <span
+					ng-show="eventForm.description.$dirty && eventForm.description.$error.required"
+					class="help-block">Description is required</span>
+			</div>
+
+			<div class="form-actions">
+				<input type="submit" value="Add" class="btn btn-primary btn-sm"
+					ng-disabled="eventForm.$invalid">
+				<button type="button" ng-click="eC.reset()"
+					class="btn btn-warning btn-sm" ng-disabled="eventForm.$pristine">Reset
+					Form</button>
+			</div>
+		</form>
+		<hr>
+	</div>
+
+
+	<table class="table">
+		<tr>
+			<th>Event No</th>
+			<th>Event Location</th>
+			<th>Event Date</th>
+			<th>Description</th>
+			<th ng-show = "currentUserRoleId == 'Role_Admin'">Delete</th>
+			<!-- <th>Edit</th> -->
+
+		</tr>
+		<tr ng-repeat="event  in events">
+			<td>{{event.eventId}}</td>
+			<td>{{event.eventLocation}}</td>
+			<td>{{event.eventDate}}</td>
+			<td>{{event.description}}</td>
+
+			<td ng-show = "currentUserRoleId == 'Role_Admin'"><a href="" ng-click="deleteEvent(event.eventId)">Delete
+			</a></td>
+			<!-- <td><a href="" ng-click="edit(event.eventId)">Edit</a></td> -->
+
+
+
+		</tr>
+	</table>
+
+</div>
