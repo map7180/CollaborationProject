@@ -88,7 +88,4 @@ public class Blog extends ErrorModel{
 	public void setDislikes(int dislikes) {
 		this.dislikes = dislikes;
 	}
-	
-	
-
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Table
 @Component
 public class Blog_Comment extends ErrorModel {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commentId_seq")
 	@SequenceGenerator(name = "commentId_seq", sequenceName = "comment_seq",allocationSize = 1)

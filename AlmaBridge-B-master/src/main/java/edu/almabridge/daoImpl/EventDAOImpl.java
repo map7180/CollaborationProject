@@ -58,6 +58,7 @@ public class EventDAOImpl implements EventDAO {
 		sessionFactory.getCurrentSession().update(event);
 		return true ;
 	}
+	
 	@Transactional
 	public Event getEvent(int eventId) {
 		return (Event)sessionFactory.getCurrentSession().get(Event.class, eventId);

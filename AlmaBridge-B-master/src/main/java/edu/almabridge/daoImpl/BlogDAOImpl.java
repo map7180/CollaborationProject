@@ -15,35 +15,32 @@ import edu.almabridge.dao.BlogDAO;
 import edu.almabridge.model.Blog;
 
 @Repository("BlogDAO")
-public class BlogDAOImpl implements BlogDAO{
-	
-	
+public class BlogDAOImpl implements BlogDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
 
 	@Autowired
-	Blog blog ;
-	
+	Blog blog;
+
 	@Autowired
-	BlogDAO blogDAO ;
-	
-	public BlogDAOImpl() { }
-	 
+	BlogDAO blogDAO;
+
+	public BlogDAOImpl() {
+	}
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
-
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
-
 	public BlogDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+
 	@Transactional
 	public boolean saveBlog(Blog blog) {
 		try {
@@ -51,9 +48,10 @@ public class BlogDAOImpl implements BlogDAO{
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return false ;
+			return false;
 		}
 	}
+
 	@Transactional
 	public boolean deleteBlog(int blogId) {
 		Blog blog = new Blog();
@@ -61,36 +59,44 @@ public class BlogDAOImpl implements BlogDAO{
 		sessionFactory.getCurrentSession().delete(blog);
 		return true;
 	}
+
 	@Transactional
-	public void updateBlog(Blog blog) {
+	public boolean updateBlog(Blog blog) {
 		try {
 			sessionFactory.getCurrentSession().update(blog);
-			
+			return true;
+
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			
+			return false;
 		}
-		
+
 	}
+
 	@Transactional
 	public Blog getBlog(int blogId) {
-		return (Blog) sessionFactory.getCurrentSession().get(Blog.class, blogId);
+
+		try {
+			return (Blog) sessionFactory.getCurrentSession().get(Blog.class, blogId);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public List<Blog> blogList() {
-		
+
 		Session session;
 
 		try {
-		    session = sessionFactory.getCurrentSession();
+			session = sessionFactory.getCurrentSession();
 		} catch (HibernateException e) {
-		    session = sessionFactory.openSession();
+			session = sessionFactory.openSession();
 		}
 		String hql = "from Blog";
-		Query query = session.createQuery(hql) ;
-		
+		Query query = session.createQuery(hql);
+
 		return query.list();
-		
+
 	}
 
 }

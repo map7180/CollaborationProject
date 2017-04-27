@@ -12,7 +12,6 @@ almaApp.controller("ChatController",function($scope,ChatService){
 	ChatService.receive().then(null,null,function(message){
 		console.log("receive in chat controller..");
 		console.log("friend id " + message.fid);
-		$scope.messages.push(message);
-		
+		$scope.messages.push(message);	
 	});
 });

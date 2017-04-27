@@ -56,6 +56,8 @@
 	<bean id="FriendDAO" class="edu.almabridge.daoImpl.FriendDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id = "Event" class = "edu.almabridge.model.Event">
+	</bean>
 
 <!-- 	<bean id="Chat" class="edu.almabridge.model.Chat">
 		<property name="sessionFactory" ref="sessionFactory" />
